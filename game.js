@@ -906,22 +906,22 @@ class SnakeLettersGame {
         // Clear canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Draw background pattern
+                // Draw background pattern
         this.drawBackground();
 
-        // Draw letters
-        this.drawLetters();
-
-                // Draw snake
+        // Draw snake first (behind letters)
         this.drawSnake();
 
         // Draw path (for debugging - can be disabled)
         // this.drawPath();
 
+        // Draw letters on top of snake
+        this.drawLetters();
+
         // Draw particles
         this.drawParticles();
 
-        // Draw confetti
+        // Draw confetti on top of everything
         this.drawConfetti();
     }
 
