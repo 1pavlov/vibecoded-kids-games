@@ -58,6 +58,8 @@ class SnakeLettersGame {
             size: 25,
             speed: 3,
             path: [],
+            color: '#32CD32', // Default green color
+            cutCount: 0, // Track how many times snake has been cut
             body: [
                 {x: 100, y: 100},
                 {x: 75, y: 100},
@@ -651,6 +653,11 @@ class SnakeLettersGame {
             const tail = this.snake.body[this.snake.body.length - 1];
             this.snake.body.push({x: tail.x - 25, y: tail.y});
 
+            // Check if snake needs to be cut (when it reaches 20 segments)
+            if (this.snake.body.length >= 20) {
+                this.cutSnake();
+            }
+
             // Play correct sound
             this.playCorrectSound();
 
@@ -830,6 +837,34 @@ class SnakeLettersGame {
         setTimeout(() => {
             this.feedbackElement.classList.add('hidden');
         }, 2000);
+    }
+
+    cutSnake() {
+        // Cut snake to 1/3 of its current length (minimum 3 segments)
+        const newLength = Math.max(3, Math.floor(this.snake.body.length / 3));
+        this.snake.body = this.snake.body.slice(0, newLength);
+
+        // Change snake color based on cut count
+        this.snake.cutCount++;
+        const colors = ['#32CD32', '#FF6B6B', '#4ECDC4', '#FFD93D', '#A8E6CF', '#FF8C94', '#C7CEEA'];
+        this.snake.color = colors[this.snake.cutCount % colors.length];
+
+        // Create special cut particles
+        this.createParticles(this.snake.x, this.snake.y, this.snake.color);
+        this.createParticles(this.snake.x, this.snake.y, '#FFD700');
+
+        // Play special sound effect
+        this.playSuccessSound();
+    }
+
+    getDarkerColor(hexColor) {
+        // Convert hex to RGB, darken it, and convert back
+        const hex = hexColor.replace('#', '');
+        const r = Math.max(0, parseInt(hex.substr(0, 2), 16) - 40);
+        const g = Math.max(0, parseInt(hex.substr(2, 2), 16) - 40);
+        const b = Math.max(0, parseInt(hex.substr(4, 2), 16) - 40);
+
+        return `rgb(${r}, ${g}, ${b})`;
     }
 
     shakeCanvas() {
@@ -1061,10 +1096,10 @@ class SnakeLettersGame {
         });
     }
 
-    drawSnake() {
-        // Draw snake body
-        this.ctx.fillStyle = '#32CD32';
-        this.ctx.strokeStyle = '#228B22';
+        drawSnake() {
+        // Draw snake body with dynamic color
+        this.ctx.fillStyle = this.snake.color;
+        this.ctx.strokeStyle = this.getDarkerColor(this.snake.color);
         this.ctx.lineWidth = 2;
 
         this.snake.body.forEach((segment, index) => {
