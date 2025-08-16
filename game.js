@@ -641,13 +641,18 @@ class SnakeLettersGame {
             if (this.currentLetterIndex >= this.currentWord.length) {
                 setTimeout(() => this.completeWord(), 500);
             }
-        } else {
-            // Wrong letter collected
+                        } else {
+            // Wrong letter collision - brief feedback only
             this.playWrongSound();
             this.createParticles(letter.x, letter.y, '#FF6347');
 
-            // Shake effect
+            // Brief shake effect
             this.shakeCanvas();
+
+            // Move snake away from wrong letter to prevent continuous collision
+            this.moveSnakeAwayFromLetter(letter);
+
+            // Don't collect wrong letters - snake continues moving
         }
     }
 
@@ -777,10 +782,50 @@ class SnakeLettersGame {
     }
 
     shakeCanvas() {
-        this.canvas.style.animation = 'shake 0.5s ease-in-out';
+        this.canvas.style.animation = 'shake 0.3s ease-in-out';
         setTimeout(() => {
             this.canvas.style.animation = '';
-        }, 500);
+        }, 300);
+    }
+
+        moveSnakeAwayFromLetter(letter) {
+        // Calculate direction away from the wrong letter
+        const dx = this.snake.x - letter.x;
+        const dy = this.snake.y - letter.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance > 0) {
+            // Normalize direction and move snake away
+            const pushDistance = 80; // Distance to push snake away
+            let normalizedX = dx / distance;
+            let normalizedY = dy / distance;
+
+            // Add random direction change (±45 degrees)
+            const randomAngle = (Math.random() - 0.5) * Math.PI / 2; // ±90 degrees in radians
+            const cos = Math.cos(randomAngle);
+            const sin = Math.sin(randomAngle);
+
+            // Apply rotation to the direction vector
+            const rotatedX = normalizedX * cos - normalizedY * sin;
+            const rotatedY = normalizedX * sin + normalizedY * cos;
+
+            // Set new position away from the letter with random direction
+            const newX = letter.x + rotatedX * pushDistance;
+            const newY = letter.y + rotatedY * pushDistance;
+
+            // Keep snake within canvas bounds
+            this.snake.x = Math.max(30, Math.min(this.canvas.width - 30, newX));
+            this.snake.y = Math.max(30, Math.min(this.canvas.height - 30, newY));
+
+            // Update snake head position
+            this.snake.body[0].x = this.snake.x;
+            this.snake.body[0].y = this.snake.y;
+
+            // Clear current path and stop movement
+            this.snake.path = [];
+            this.snake.targetX = this.snake.x;
+            this.snake.targetY = this.snake.y;
+        }
     }
 
 
