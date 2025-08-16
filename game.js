@@ -8,6 +8,9 @@ class SnakeLettersGame {
         this.feedbackElement = document.getElementById('feedback');
         this.hintElement = document.getElementById('hint');
         this.nextWordBtn = document.getElementById('nextWordBtn');
+        this.wordCompleteOverlay = document.getElementById('wordCompleteOverlay');
+        this.completedWordDisplay = document.querySelector('.completed-word-display');
+        this.continueBtn = document.getElementById('continueBtn');
 
 
         // Game state
@@ -78,6 +81,7 @@ class SnakeLettersGame {
         this.setupCanvas();
         this.setupEventListeners();
         this.initGame();
+        this.hideWordCompletionOverlay(); // Ensure overlay is hidden on startup
         this.gameLoop();
     }
 
@@ -221,6 +225,9 @@ class SnakeLettersGame {
 
         // Next word button handler
         this.nextWordBtn.addEventListener('click', () => this.nextWord());
+
+        // Continue button handler for word completion overlay
+        this.continueBtn.addEventListener('click', () => this.continueToNextWord());
     }
 
     handleClick(e) {
@@ -655,20 +662,46 @@ class SnakeLettersGame {
         }
     }
 
-        completeWord() {
+            completeWord() {
         this.playSuccessSound();
 
         // Create confetti celebration
         this.createConfetti();
 
-        // Move to next word
+        // Show word completion overlay after confetti
         setTimeout(() => {
-            this.currentWordIndex++;
-            this.loadWord(this.currentWordIndex);
-            this.generateLetters();
-            this.updateWordDisplay();
-            this.updateScore();
-        }, 3000); // Extended time to enjoy confetti
+            this.showWordCompletionOverlay();
+        }, 1500);
+    }
+
+        showWordCompletionOverlay() {
+        // Display the completed word in large style
+        this.completedWordDisplay.textContent = this.currentWord;
+
+        // Ensure overlay is visible
+        this.wordCompleteOverlay.classList.remove('hidden');
+        this.wordCompleteOverlay.style.display = 'flex';
+    }
+
+            hideWordCompletionOverlay() {
+        // Ensure overlay is completely hidden
+        this.wordCompleteOverlay.classList.add('hidden');
+        this.wordCompleteOverlay.style.display = 'none';
+    }
+
+    continueToNextWord() {
+        // Hide the overlay completely
+        this.hideWordCompletionOverlay();
+
+        // Move to next word
+        this.currentWordIndex++;
+        this.loadWord(this.currentWordIndex);
+        this.generateLetters();
+        this.updateWordDisplay();
+        this.updateScore();
+
+        // Clear any remaining confetti
+        this.confetti = [];
     }
 
     createParticles(x, y, color) {
