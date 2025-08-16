@@ -43,6 +43,15 @@ body {
     gap: 15px;
 }
 
+.game-timer {
+    font-size: 16px;
+    color: #999999;
+    font-weight: normal;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    opacity: 0.7;
+    user-select: none;
+}
+
 .target-word {
     font-size: 48px;
     font-weight: bold;
@@ -302,6 +311,10 @@ body {
         gap: 10px;
     }
 
+    .game-timer {
+        font-size: 14px;
+    }
+
     .next-word-btn {
         font-size: 14px;
         padding: 8px 16px;
@@ -340,7 +353,11 @@ body {
 
     #gameControls {
         justify-content: center;
-        gap: 15px;
+        gap: 10px;
+    }
+
+    .game-timer {
+        font-size: 12px;
     }
 
     .target-word {

@@ -11,6 +11,7 @@ class SnakeLettersGame {
         this.wordCompleteOverlay = document.getElementById('wordCompleteOverlay');
         this.completedWordDisplay = document.querySelector('.completed-word-display');
         this.continueBtn = document.getElementById('continueBtn');
+        this.gameTimerElement = document.getElementById('gameTimer');
 
 
         // Game state
@@ -73,6 +74,8 @@ class SnakeLettersGame {
         this.lastTime = 0;
         this.hintTimer = 0;
         this.hintDelay = 5000; // 5 seconds
+        this.gameStartTime = Date.now();
+        this.gameTime = 0;
 
         // Audio context for letter pronunciation
         this.audioContext = null;
@@ -368,6 +371,18 @@ class SnakeLettersGame {
 
     updateScore() {
         this.scoreElement.textContent = `Слово: ${this.currentWordIndex + 1}`;
+    }
+
+    updateGameTimer() {
+        // Calculate elapsed time
+        this.gameTime = Date.now() - this.gameStartTime;
+        const seconds = Math.floor(this.gameTime / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const displaySeconds = seconds % 60;
+
+        // Format time as M:SS
+        const timeString = `${minutes}:${displaySeconds.toString().padStart(2, '0')}`;
+        this.gameTimerElement.textContent = `⏱️ ${timeString}`;
     }
 
         moveSnake() {
@@ -1189,6 +1204,7 @@ class SnakeLettersGame {
         this.updateParticles();
         this.updateConfetti();
         this.updateHint(deltaTime);
+        this.updateGameTimer();
 
         // Render everything
         this.render();
