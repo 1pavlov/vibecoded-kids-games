@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: linear-gradient(135deg, #87CEEB, #98FB98);
     min-height: 100vh;
     width: 100vw;
@@ -86,7 +86,7 @@ body {
     padding: 12px 20px;
     font-size: 16px;
     font-weight: bold;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);

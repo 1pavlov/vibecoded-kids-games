@@ -976,12 +976,12 @@ class SnakeLettersGame {
 
             this.ctx.restore();
 
-            // Draw letter text
-            this.ctx.fillStyle = colors.text;
-            this.ctx.font = 'bold 24px "Comic Sans MS", cursive';
-            this.ctx.textAlign = 'center';
-            this.ctx.textBaseline = 'middle';
-            this.ctx.fillText(letter.letter, x, y);
+                    // Draw letter text
+        this.ctx.fillStyle = colors.text;
+        this.ctx.font = 'bold 24px "Helvetica Neue", Helvetica, Arial, sans-serif';
+        this.ctx.textAlign = 'center';
+        this.ctx.textBaseline = 'middle';
+        this.ctx.fillText(letter.letter, x, y);
         });
     }
 
