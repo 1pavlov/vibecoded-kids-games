@@ -290,6 +290,9 @@ class SnakeLettersGame {
         this.snake.targetX = (e.clientX - rect.left) * scaleX;
         this.snake.targetY = (e.clientY - rect.top) * scaleY;
 
+        // Clear current path to force immediate recalculation
+        this.snake.path = [];
+
         this.resetHintTimer();
     }
 
@@ -301,6 +304,9 @@ class SnakeLettersGame {
         const touch = e.touches[0];
         this.snake.targetX = (touch.clientX - rect.left) * scaleX;
         this.snake.targetY = (touch.clientY - rect.top) * scaleY;
+
+        // Clear current path to force immediate recalculation
+        this.snake.path = [];
 
         this.resetHintTimer();
     }
