@@ -73,7 +73,7 @@ class SnakeLettersGame {
         // Game timing
         this.lastTime = 0;
         this.hintTimer = 0;
-        this.hintDelay = 5000; // 5 seconds
+        this.hintDelay = 45000; // 45 seconds
         this.gameStartTime = Date.now();
         this.gameTime = 0;
 
