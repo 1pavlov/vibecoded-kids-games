@@ -618,7 +618,7 @@ class SnakeLettersGame {
         return path;
     }
 
-    checkCollisions() {
+        checkCollisions() {
         const head = this.snake.body[0];
 
         this.letters.forEach(letter => {
@@ -628,7 +628,12 @@ class SnakeLettersGame {
             const dy = head.y - letter.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance < 35) {
+            // Use larger collision radius for correct letters (child-friendly)
+            const expectedLetter = this.currentWord[this.currentLetterIndex];
+            const isTargetLetter = letter.isCorrect && letter.letter === expectedLetter;
+            const collisionRadius = isTargetLetter ? 50 : 35; // Bigger radius for target letters
+
+            if (distance < collisionRadius) {
                 this.handleLetterCollection(letter);
             }
         });
