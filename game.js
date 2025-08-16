@@ -13,40 +13,121 @@ class SnakeLettersGame {
         this.continueBtn = document.getElementById('continueBtn');
         this.gameTimerElement = document.getElementById('gameTimer');
 
-
         // Game state
         this.currentWordIndex = 0;
         this.currentLetterIndex = 0;
         this.gameWords = this.shuffleWords([
             // семья
-            "МАМА","ПАПА","БРАТ","СЕСТРА",
+            'МАМА',
+            'ПАПА',
+            'БРАТ',
+            'СЕСТРА',
 
             // части тела
-            "РУКА","НОГА","УХО","НОС","РОТ","ЗУБ","ГЛАЗ","ЩЕКА",
+            'РУКА',
+            'НОГА',
+            'УХО',
+            'НОС',
+            'РОТ',
+            'ЗУБ',
+            'ГЛАЗ',
+            'ЩЕКА',
 
             // животные
-            "КОТ","ПЁС","СОВА","ЛИСА","ВОЛК","ЗАЯЦ","ТИГР","ЛЕВ","МУХА","ЖУК","РЫБА","ЁЖ","КРОТ",
+            'КОТ',
+            'ПЁС',
+            'СОВА',
+            'ЛИСА',
+            'ВОЛК',
+            'ЗАЯЦ',
+            'ТИГР',
+            'ЛЕВ',
+            'МУХА',
+            'ЖУК',
+            'РЫБА',
+            'ЁЖ',
+            'КРОТ',
 
             // игрушки
-            "МЯЧ","КУБ","КУКЛА","КАРТЫ","ЛЕГО","ЮЛА",
+            'МЯЧ',
+            'КУБ',
+            'КУКЛА',
+            'КАРТЫ',
+            'ЛЕГО',
+            'ЮЛА',
 
             // предметы дома
-            "ДОМ","СТОЛ","СТУЛ","ОКНО","ДВЕРЬ","КРОВАТЬ","ЛАМПА","КНИГА","ТЕЛЕВИЗОР",
+            'ДОМ',
+            'СТОЛ',
+            'СТУЛ',
+            'ОКНО',
+            'ДВЕРЬ',
+            'КРОВАТЬ',
+            'ЛАМПА',
+            'КНИГА',
+            'ТЕЛЕВИЗОР',
 
             // природа
-            "ЛЕС","САД","РЕКА","МОРЕ","ГОРА","НЕБО","СОЛНЦЕ","ЗВЕЗДА","ЛУНА","СНЕГ","ДОЖДЬ","ЦВЕТЫ","ТРАВА",
+            'ЛЕС',
+            'САД',
+            'РЕКА',
+            'МОРЕ',
+            'ГОРА',
+            'НЕБО',
+            'СОЛНЦЕ',
+            'ЗВЕЗДА',
+            'ЛУНА',
+            'СНЕГ',
+            'ДОЖДЬ',
+            'ЦВЕТЫ',
+            'ТРАВА',
 
             // еда
-            "ХЛЕБ","СЫР","СУП","КАША","МОЛОКО","СОК","ЧАЙ","МЯСО","РИС","ЯЙЦО","ТОРТ","ЯБЛОКО","ГРУША","СЛИВА","МОРКОВЬ",
+            'ХЛЕБ',
+            'СЫР',
+            'СУП',
+            'КАША',
+            'МОЛОКО',
+            'СОК',
+            'ЧАЙ',
+            'МЯСО',
+            'РИС',
+            'ЯЙЦО',
+            'ТОРТ',
+            'ЯБЛОКО',
+            'ГРУША',
+            'СЛИВА',
+            'МОРКОВЬ',
 
             // транспорт
-            "АВТО","ТАКСИ","ТРАМВАЙ","ПОЕЗД","САНИ","ЛОДКА",
+            'АВТО',
+            'ТАКСИ',
+            'ТРАМВАЙ',
+            'ПОЕЗД',
+            'САНИ',
+            'ЛОДКА',
 
             // одежда
-            "ШУБА","ШАПКА","НОСКИ","ПАЛЬТО","САПОГИ","ПЛАТЬЕ","ЮБКА","ФУТБОЛКА",
+            'ШУБА',
+            'ШАПКА',
+            'НОСКИ',
+            'ПАЛЬТО',
+            'САПОГИ',
+            'ПЛАТЬЕ',
+            'ЮБКА',
+            'ФУТБОЛКА',
 
             // разные простые слова
-            "МИР","СОН","СВЕТ","ШКОЛА","ПАРК","ДРУГ","ИГРА","ПЕСНЯ","СЛОВО","КАРТА"
+            'МИР',
+            'СОН',
+            'СВЕТ',
+            'ШКОЛА',
+            'ПАРК',
+            'ДРУГ',
+            'ИГРА',
+            'ПЕСНЯ',
+            'СЛОВО',
+            'КАРТА'
         ]);
 
         // Snake properties
@@ -61,9 +142,9 @@ class SnakeLettersGame {
             color: '#32CD32', // Default green color
             cutCount: 0, // Track how many times snake has been cut
             body: [
-                {x: 100, y: 100},
-                {x: 75, y: 100},
-                {x: 50, y: 100}
+                { x: 100, y: 100 },
+                { x: 75, y: 100 },
+                { x: 50, y: 100 }
             ]
         };
 
@@ -110,14 +191,14 @@ class SnakeLettersGame {
         if (this.isVowel(letter)) {
             return {
                 background: '#FFE6E6', // Light red background
-                border: '#DC143C',     // Dark red border
-                text: '#8B0000'        // Dark red text
+                border: '#DC143C', // Dark red border
+                text: '#8B0000' // Dark red text
             };
         } else {
             return {
                 background: '#E6F3FF', // Light blue background
-                border: '#4169E1',     // Blue border
-                text: '#191970'        // Navy blue text
+                border: '#4169E1', // Blue border
+                text: '#191970' // Navy blue text
             };
         }
     }
@@ -130,7 +211,7 @@ class SnakeLettersGame {
         }
     }
 
-                setupCanvas() {
+    setupCanvas() {
         // Get viewport dimensions
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
@@ -203,14 +284,14 @@ class SnakeLettersGame {
 
     setupEventListeners() {
         // Mouse and touch events for movement
-        this.canvas.addEventListener('click', (e) => this.handleClick(e));
-        this.canvas.addEventListener('touchstart', (e) => {
+        this.canvas.addEventListener('click', e => this.handleClick(e));
+        this.canvas.addEventListener('touchstart', e => {
             e.preventDefault();
             this.handleTouch(e);
         });
 
         // Prevent context menu on long press
-        this.canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+        this.canvas.addEventListener('contextmenu', e => e.preventDefault());
 
         // Window resize handler with debouncing
         let resizeTimeout;
@@ -244,8 +325,6 @@ class SnakeLettersGame {
         this.snake.targetY = (e.clientY - rect.top) * scaleY;
 
         this.resetHintTimer();
-
-
     }
 
     handleTouch(e) {
@@ -258,8 +337,6 @@ class SnakeLettersGame {
         this.snake.targetY = (touch.clientY - rect.top) * scaleY;
 
         this.resetHintTimer();
-
-
     }
 
     initGame() {
@@ -278,7 +355,6 @@ class SnakeLettersGame {
         this.currentWord = this.gameWords[index];
         this.currentLetterIndex = 0;
         this.resetHintTimer();
-
     }
 
     generateLetters() {
@@ -299,7 +375,37 @@ class SnakeLettersGame {
         });
 
         // Add distractor letters
-        const distractors = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ы', 'Э', 'Ю', 'Я'];
+        const distractors = [
+            'А',
+            'Б',
+            'В',
+            'Г',
+            'Д',
+            'Е',
+            'Ж',
+            'З',
+            'И',
+            'К',
+            'Л',
+            'М',
+            'Н',
+            'О',
+            'П',
+            'Р',
+            'С',
+            'Т',
+            'У',
+            'Ф',
+            'Х',
+            'Ц',
+            'Ч',
+            'Ш',
+            'Щ',
+            'Ы',
+            'Э',
+            'Ю',
+            'Я'
+        ];
         const numDistractors = Math.min(4, Math.floor(currentWord.length * 1.5));
 
         for (let i = 0; i < numDistractors; i++) {
@@ -351,7 +457,7 @@ class SnakeLettersGame {
         }
     }
 
-        updateWordDisplay() {
+    updateWordDisplay() {
         const word = this.currentWord;
         let html = '';
 
@@ -362,8 +468,9 @@ class SnakeLettersGame {
             const className = isCollected ? 'letter collected' : 'letter';
 
             // Add inline styles for vowel/consonant colors
-            const colorStyle = isCollected ? '' :
-                `style="background-color: ${colors.background}; border-color: ${colors.border}; color: ${colors.text};"`;
+            const colorStyle = isCollected
+                ? ''
+                : `style="background-color: ${colors.background}; border-color: ${colors.border}; color: ${colors.text};"`;
 
             html += `<span class="${className}" ${colorStyle}>${letter}</span>`;
         }
@@ -387,7 +494,7 @@ class SnakeLettersGame {
         this.gameTimerElement.textContent = `⏱️ ${timeString}`;
     }
 
-        moveSnake() {
+    moveSnake() {
         // If we don't have a path or reached the target, calculate new path
         if (!this.snake.path || this.snake.path.length === 0 || this.hasReachedTarget()) {
             this.calculatePath();
@@ -427,7 +534,7 @@ class SnakeLettersGame {
         }
 
         // Update snake body
-        this.snake.body[0] = {x: this.snake.x, y: this.snake.y};
+        this.snake.body[0] = { x: this.snake.x, y: this.snake.y };
 
         for (let i = 1; i < this.snake.body.length; i++) {
             const prev = this.snake.body[i - 1];
@@ -451,8 +558,8 @@ class SnakeLettersGame {
     }
 
     calculatePath() {
-        const start = {x: Math.round(this.snake.x / 20), y: Math.round(this.snake.y / 20)};
-        const end = {x: Math.round(this.snake.targetX / 20), y: Math.round(this.snake.targetY / 20)};
+        const start = { x: Math.round(this.snake.x / 20), y: Math.round(this.snake.y / 20) };
+        const end = { x: Math.round(this.snake.targetX / 20), y: Math.round(this.snake.targetY / 20) };
 
         const path = this.findPath(start, end);
 
@@ -464,7 +571,7 @@ class SnakeLettersGame {
             }));
         } else {
             // Fallback to direct movement if no path found
-            this.snake.path = [{x: this.snake.targetX, y: this.snake.targetY}];
+            this.snake.path = [{ x: this.snake.targetX, y: this.snake.targetY }];
         }
     }
 
@@ -521,7 +628,7 @@ class SnakeLettersGame {
                 const neighborKey = `${neighbor.x},${neighbor.y}`;
 
                 // Skip if in closed set or is obstacle
-                if (closedSet.has(neighborKey) || obstacles[neighbor.y] && obstacles[neighbor.y][neighbor.x]) {
+                if (closedSet.has(neighborKey) || (obstacles[neighbor.y] && obstacles[neighbor.y][neighbor.x])) {
                     continue;
                 }
 
@@ -558,10 +665,14 @@ class SnakeLettersGame {
         const expectedLetter = this.currentWord[this.currentLetterIndex];
 
         this.letters.forEach(letter => {
-            if (letter.collected) return;
+            if (letter.collected) {
+                return;
+            }
 
             // Don't treat the target letter as an obstacle
-            if (letter.isCorrect && letter.letter === expectedLetter) return;
+            if (letter.isCorrect && letter.letter === expectedLetter) {
+                return;
+            }
 
             const gridX = Math.round(letter.x / 20);
             const gridY = Math.round(letter.y / 20);
@@ -584,8 +695,14 @@ class SnakeLettersGame {
     getNeighbors(node, gridWidth, gridHeight) {
         const neighbors = [];
         const directions = [
-            {x: 0, y: -1}, {x: 1, y: 0}, {x: 0, y: 1}, {x: -1, y: 0}, // cardinal
-            {x: -1, y: -1}, {x: 1, y: -1}, {x: 1, y: 1}, {x: -1, y: 1} // diagonal
+            { x: 0, y: -1 },
+            { x: 1, y: 0 },
+            { x: 0, y: 1 },
+            { x: -1, y: 0 }, // cardinal
+            { x: -1, y: -1 },
+            { x: 1, y: -1 },
+            { x: 1, y: 1 },
+            { x: -1, y: 1 } // diagonal
         ];
 
         for (const dir of directions) {
@@ -593,7 +710,7 @@ class SnakeLettersGame {
             const y = node.y + dir.y;
 
             if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight) {
-                neighbors.push({x, y});
+                neighbors.push({ x, y });
             }
         }
 
@@ -620,11 +737,13 @@ class SnakeLettersGame {
         return path;
     }
 
-        checkCollisions() {
+    checkCollisions() {
         const head = this.snake.body[0];
 
         this.letters.forEach(letter => {
-            if (letter.collected) return;
+            if (letter.collected) {
+                return;
+            }
 
             const dx = head.x - letter.x;
             const dy = head.y - letter.y;
@@ -651,7 +770,7 @@ class SnakeLettersGame {
 
             // Grow snake
             const tail = this.snake.body[this.snake.body.length - 1];
-            this.snake.body.push({x: tail.x - 25, y: tail.y});
+            this.snake.body.push({ x: tail.x - 25, y: tail.y });
 
             // Check if snake needs to be cut (when it reaches 20 segments)
             if (this.snake.body.length >= 20) {
@@ -674,7 +793,7 @@ class SnakeLettersGame {
             if (this.currentLetterIndex >= this.currentWord.length) {
                 setTimeout(() => this.completeWord(), 500);
             }
-                        } else {
+        } else {
             // Wrong letter collision - brief feedback only
             this.playWrongSound();
             this.createParticles(letter.x, letter.y, '#FF6347');
@@ -689,7 +808,7 @@ class SnakeLettersGame {
         }
     }
 
-            completeWord() {
+    completeWord() {
         this.playSuccessSound();
 
         // Create confetti celebration
@@ -701,7 +820,7 @@ class SnakeLettersGame {
         }, 1500);
     }
 
-        showWordCompletionOverlay() {
+    showWordCompletionOverlay() {
         // Display the completed word in large style
         this.completedWordDisplay.textContent = this.currentWord;
 
@@ -710,7 +829,7 @@ class SnakeLettersGame {
         this.wordCompleteOverlay.style.display = 'flex';
     }
 
-            hideWordCompletionOverlay() {
+    hideWordCompletionOverlay() {
         // Ensure overlay is completely hidden
         this.wordCompleteOverlay.classList.add('hidden');
         this.wordCompleteOverlay.style.display = 'none';
@@ -747,9 +866,21 @@ class SnakeLettersGame {
 
     createConfetti() {
         const colors = [
-            '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
-            '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9',
-            '#F8C471', '#82E0AA', '#F1948A', '#85C1E9', '#D7BDE2'
+            '#FF6B6B',
+            '#4ECDC4',
+            '#45B7D1',
+            '#96CEB4',
+            '#FFEAA7',
+            '#DDA0DD',
+            '#98D8C8',
+            '#F7DC6F',
+            '#BB8FCE',
+            '#85C1E9',
+            '#F8C471',
+            '#82E0AA',
+            '#F1948A',
+            '#85C1E9',
+            '#D7BDE2'
         ];
 
         // Create confetti pieces
@@ -789,7 +920,7 @@ class SnakeLettersGame {
                     life: 1.0,
                     decay: 0.004,
                     gravity: 0.08,
-                    shape: Math.random() < 0.3 ? 'star' : (Math.random() < 0.5 ? 'rectangle' : 'circle')
+                    shape: Math.random() < 0.3 ? 'star' : Math.random() < 0.5 ? 'rectangle' : 'circle'
                 });
             }
         }
@@ -874,7 +1005,7 @@ class SnakeLettersGame {
         }, 300);
     }
 
-        moveSnakeAwayFromLetter(letter) {
+    moveSnakeAwayFromLetter(letter) {
         // Calculate direction away from the wrong letter
         const dx = this.snake.x - letter.x;
         const dy = this.snake.y - letter.y;
@@ -883,11 +1014,11 @@ class SnakeLettersGame {
         if (distance > 0) {
             // Normalize direction and move snake away
             const pushDistance = 80; // Distance to push snake away
-            let normalizedX = dx / distance;
-            let normalizedY = dy / distance;
+            const normalizedX = dx / distance;
+            const normalizedY = dy / distance;
 
             // Add random direction change (±45 degrees)
-            const randomAngle = (Math.random() - 0.5) * Math.PI / 2; // ±90 degrees in radians
+            const randomAngle = ((Math.random() - 0.5) * Math.PI) / 2; // ±90 degrees in radians
             const cos = Math.cos(randomAngle);
             const sin = Math.sin(randomAngle);
 
@@ -914,8 +1045,6 @@ class SnakeLettersGame {
         }
     }
 
-
-
     resetHintTimer() {
         this.hintTimer = 0;
         this.hintElement.classList.add('hidden');
@@ -936,8 +1065,8 @@ class SnakeLettersGame {
 
     showHint() {
         const expectedLetter = this.currentWord[this.currentLetterIndex];
-        const targetLetter = this.letters.find(letter =>
-            letter.letter === expectedLetter && !letter.collected && letter.isCorrect
+        const targetLetter = this.letters.find(
+            letter => letter.letter === expectedLetter && !letter.collected && letter.isCorrect
         );
 
         if (targetLetter) {
@@ -964,7 +1093,9 @@ class SnakeLettersGame {
     }
 
     playBeep(frequency, duration, type = 'sine') {
-        if (!this.audioContext) return;
+        if (!this.audioContext) {
+            return;
+        }
 
         const oscillator = this.audioContext.createOscillator();
         const gainNode = this.audioContext.createGain();
@@ -981,8 +1112,6 @@ class SnakeLettersGame {
         oscillator.start(this.audioContext.currentTime);
         oscillator.stop(this.audioContext.currentTime + duration);
     }
-
-
 
     nextWord() {
         // Disable button temporarily to prevent double clicks
@@ -1017,7 +1146,7 @@ class SnakeLettersGame {
         // Clear canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-                // Draw background pattern
+        // Draw background pattern
         this.drawBackground();
 
         // Draw snake first (behind letters)
@@ -1056,9 +1185,11 @@ class SnakeLettersGame {
         }
     }
 
-        drawLetters() {
+    drawLetters() {
         this.letters.forEach(letter => {
-            if (letter.collected) return;
+            if (letter.collected) {
+                return;
+            }
 
             const x = letter.x;
             const y = letter.y;
@@ -1087,16 +1218,16 @@ class SnakeLettersGame {
 
             this.ctx.restore();
 
-                    // Draw letter text
-        this.ctx.fillStyle = colors.text;
-        this.ctx.font = 'bold 24px "Helvetica Neue", Helvetica, Arial, sans-serif';
-        this.ctx.textAlign = 'center';
-        this.ctx.textBaseline = 'middle';
-        this.ctx.fillText(letter.letter, x, y);
+            // Draw letter text
+            this.ctx.fillStyle = colors.text;
+            this.ctx.font = 'bold 24px "Helvetica Neue", Helvetica, Arial, sans-serif';
+            this.ctx.textAlign = 'center';
+            this.ctx.textBaseline = 'middle';
+            this.ctx.fillText(letter.letter, x, y);
         });
     }
 
-        drawSnake() {
+    drawSnake() {
         // Draw snake body with dynamic color
         this.ctx.fillStyle = this.snake.color;
         this.ctx.strokeStyle = this.getDarkerColor(this.snake.color);
@@ -1194,13 +1325,13 @@ class SnakeLettersGame {
 
             // Draw different shapes
             if (piece.shape === 'rectangle') {
-                this.ctx.fillRect(-piece.width/2, -piece.height/2, piece.width, piece.height);
+                this.ctx.fillRect(-piece.width / 2, -piece.height / 2, piece.width, piece.height);
             } else if (piece.shape === 'circle') {
                 this.ctx.beginPath();
-                this.ctx.arc(0, 0, piece.width/2, 0, Math.PI * 2);
+                this.ctx.arc(0, 0, piece.width / 2, 0, Math.PI * 2);
                 this.ctx.fill();
             } else if (piece.shape === 'star') {
-                this.drawStar(0, 0, 5, piece.width/2, piece.width/4);
+                this.drawStar(0, 0, 5, piece.width / 2, piece.width / 4);
                 this.ctx.fill();
             }
 
@@ -1209,7 +1340,7 @@ class SnakeLettersGame {
     }
 
     drawStar(cx, cy, spikes, outerRadius, innerRadius) {
-        let rot = Math.PI / 2 * 3;
+        let rot = (Math.PI / 2) * 3;
         let x = cx;
         let y = cy;
         const step = Math.PI / spikes;
@@ -1250,7 +1381,7 @@ class SnakeLettersGame {
         this.render();
 
         // Continue the loop
-        requestAnimationFrame((time) => this.gameLoop(time));
+        requestAnimationFrame(time => this.gameLoop(time));
     }
 }
 

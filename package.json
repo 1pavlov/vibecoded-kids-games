@@ -1,0 +1,36 @@
+{
+    "name": "snake-learn-letters",
+    "version": "1.0.0",
+    "description": "Educational snake game for learning Russian letters",
+    "main": "index.html",
+    "scripts": {
+        "lint": "eslint game.js",
+        "lint:fix": "eslint game.js --fix",
+        "format": "prettier --write game.js",
+        "format:check": "prettier --check game.js",
+        "serve": "python3 -m http.server 8000",
+        "dev": "python3 -m http.server 8000",
+        "check": "npm run lint && npm run format:check"
+    },
+    "keywords": [
+        "educational",
+        "game",
+        "russian",
+        "letters",
+        "children"
+    ],
+    "author": "1pavlov",
+    "license": "MIT",
+    "devDependencies": {
+        "eslint": "^8.57.1",
+        "prettier": "^3.6.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/1pavlov/videcoded-kids-games.git"
+    },
+    "bugs": {
+        "url": "https://github.com/1pavlov/videcoded-kids-games/issues"
+    },
+    "homepage": "https://github.com/1pavlov/videcoded-kids-games#readme"
+}
