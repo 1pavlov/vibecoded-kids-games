@@ -624,9 +624,8 @@ class SnakeLettersGame {
             const tail = this.snake.body[this.snake.body.length - 1];
             this.snake.body.push({x: tail.x - 25, y: tail.y});
 
-            // Play correct sound and speak letter
+            // Play correct sound
             this.playCorrectSound();
-            this.speakLetter(letter.letter);
 
             // Create particles
             this.createParticles(letter.x, letter.y, '#32CD32');
@@ -658,7 +657,6 @@ class SnakeLettersGame {
 
         completeWord() {
         this.playSuccessSound();
-        this.speakWord(this.currentWord);
 
         // Create confetti celebration
         this.createConfetti();
@@ -896,27 +894,7 @@ class SnakeLettersGame {
         oscillator.stop(this.audioContext.currentTime + duration);
     }
 
-    speakLetter(letter) {
-        if ('speechSynthesis' in window) {
-            const utterance = new SpeechSynthesisUtterance(letter);
-            utterance.lang = 'ru-RU';
-            utterance.rate = 0.8;
-            utterance.pitch = 1.2;
-            speechSynthesis.speak(utterance);
-        }
-    }
 
-    speakWord(word) {
-        if ('speechSynthesis' in window) {
-            setTimeout(() => {
-                const utterance = new SpeechSynthesisUtterance(word);
-                utterance.lang = 'ru-RU';
-                utterance.rate = 0.7;
-                utterance.pitch = 1.1;
-                speechSynthesis.speak(utterance);
-            }, 500);
-        }
-    }
 
     nextWord() {
         // Disable button temporarily to prevent double clicks
@@ -1190,17 +1168,14 @@ class SnakeLettersGame {
 // Initialize game when page loads
 document.addEventListener('DOMContentLoaded', () => {
     // Enable audio context on first user interaction
-    document.addEventListener('click', () => {
+    const enableAudio = () => {
         if (window.game && window.game.audioContext && window.game.audioContext.state === 'suspended') {
             window.game.audioContext.resume();
         }
-    }, { once: true });
+    };
 
-    document.addEventListener('touchstart', () => {
-        if (window.game && window.game.audioContext && window.game.audioContext.state === 'suspended') {
-            window.game.audioContext.resume();
-        }
-    }, { once: true });
+    document.addEventListener('click', enableAudio, { once: true });
+    document.addEventListener('touchstart', enableAudio, { once: true });
 
     // Start the game
     window.game = new SnakeLettersGame();
