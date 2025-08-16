@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Змейка — Учим Буквы</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="gameHeader">
+            <div id="targetWord" class="target-word"></div>
+            <div id="gameControls">
+                <div id="score" class="score">Слово: 1</div>
+                <button id="nextWordBtn" class="next-word-btn">Следующее слово →</button>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+        <div id="gameUI">
+            <div id="feedback" class="feedback hidden"></div>
+            <div id="hint" class="hint hidden">Найди букву!</div>
+        </div>
+    </div>
+
+    <!-- Audio elements for sounds -->
+    <audio id="correctSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGWm98OScTgwOUarm7blkHgU5k9n1unEiBC13yO/eizEIHWq+8+OWT" type="audio/wav">
+    </audio>
+    <audio id="wrongSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm1" type="audio/wav">
+    </audio>
+    <audio id="successSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10" type="audio/wav">
+    </audio>
+
+    <script src="game.js"></script>
+</body>
+</html>
